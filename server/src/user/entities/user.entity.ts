@@ -1,9 +1,15 @@
-import { Column, Table, Model } from 'sequelize-typescript';
+import { Column, Table, Model, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'user',
+  tableName: 'users',
+  timestamps: false, // Disable timestamps
 })
 export class User extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Column({ field: 'userID' }) // Use field option to specify the actual column name
+  userId: number;
+  
   @Column
   name: string;
 
@@ -11,5 +17,8 @@ export class User extends Model {
   email: string;
 
   @Column
-  role: string;
+  isAdmin: boolean;
+
+  @Column
+  password: string;
 }
