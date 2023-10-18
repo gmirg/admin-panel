@@ -7,6 +7,7 @@ import { UserComponent } from './Components/user/user.component';
 import { AdminComponent } from './Components/admin/admin.component';
 import { AuthGuard } from './Guards/auth.guard';
 import { SecureGuard } from './Guards/secure.guard';
+import { PanelComponent } from './Components/panel/panel.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {
       role: ['Admin'],
+    },
+  },
+  {
+    path: 'Panel',
+    component: PanelComponent,
+    canActivate: [AuthGuard],
+    data: {
+      role: ['User','Admin'],
     },
   },
 

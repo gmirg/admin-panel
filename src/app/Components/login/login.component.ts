@@ -50,6 +50,7 @@ export class LoginComponent {
       password: this.password?.value,
     };
     if (this.form.valid) {
+      console.log(LoginInfo)
       this.userService.signIn(LoginInfo).subscribe({
         next: (data: any) => {
           this.authService.saveToken(data.token);
@@ -63,7 +64,8 @@ export class LoginComponent {
         },
       });
     } else {
-      this._snackBar.open('Enter a valid informations !!!', '❌');
+      this._snackBar.open('Enter a valid information !!!', '❌');
     }
+    
   }
 }

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const  APIUrlUser ="http://localhost:3000/user";
-const  APIUrlAuth =" http://localhost:3000/user/login";
+const  APIUrlAuth ="http://localhost:3000/auth/login";
 
 @Injectable({
   providedIn: 'root'

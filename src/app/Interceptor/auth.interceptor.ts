@@ -20,16 +20,16 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let authReq = req;
+    console.log(authReq)
     const token = this.token.getToken();
-    if (token != null) {
-    // Add JWT token to the request header
-    authReq = req.clone({
+    if (token) {
+      // Add JWT token to the request header
+      authReq = req.clone({
         headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token),
       });
-
-    // for Node.js Express back-end
-    //authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, token) });
     }
+    console.log('Request URL:', authReq.url); // Log the request URL
+    console.log('Request Headers:', authReq.headers); // Log the request headers
     return next.handle(authReq);
   }
 }

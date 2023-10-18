@@ -6,42 +6,46 @@ import { Observable } from 'rxjs';
 const TOKEN_KEY = 'TOKEN_KEY';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  constructor(private router : Router) {}
+  constructor(private router: Router) {}
 
-  public saveToken(token : string): void {
+  public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
   public getToken(): string | null {
-    return window.sessionStorage.getItem(TOKEN_KEY) !== null ? window.sessionStorage.getItem(TOKEN_KEY) : null;
+    return window.sessionStorage.getItem(TOKEN_KEY) !== null
+      ? window.sessionStorage.getItem(TOKEN_KEY)
+      : null;
   }
-  public getUser():string | null{
+  public getUser(): string | null {
     const jwtToken = this.getToken();
-      const decodedToken: any = this.getToken() != null ? jwt_decode(jwtToken as string) : null;
-      const userId = decodedToken != null ? decodedToken?.sub : null;
+    const decodedToken: any =
+      this.getToken() != null ? jwt_decode(jwtToken as string) : null;
+    const userId = decodedToken != null ? decodedToken?.sub : null;
     return userId;
   }
-  public getUserId():string | null{
+  public getUserId(): string | null {
     const jwtToken = this.getToken();
-      const decodedToken: any = this.getToken() != null ? jwt_decode(jwtToken as string) : null;
-      const userId = decodedToken != null ? decodedToken?.id : null;
+    const decodedToken: any =
+      this.getToken() != null ? jwt_decode(jwtToken as string) : null;
+    const userId = decodedToken != null ? decodedToken?.id : null;
     return userId;
   }
-  public getRole(){
+  public getRole() {
     const jwtToken = this.getToken();
-      const decodedToken: any = this.getToken() != null ? jwt_decode(jwtToken as string) : null;
-      const userRole = decodedToken != null ? decodedToken?.Role : null;
+    const decodedToken: any =
+      this.getToken() != null ? jwt_decode(jwtToken as string) : null;
+    const userRole = decodedToken != null ? decodedToken?.Role : null;
     return userRole;
   }
 
-    signOut(): void {
-      window.sessionStorage.clear();
-      this.router.navigate(['/Home'])
-      .then(() => {
-        window.location.reload();
-      });
-    }
+  signOut(): void {
+    window.sessionStorage.clear();
+    this.router.navigate(['/Home']).then(() => {
+      window.location.reload();
+    });
   }
+}

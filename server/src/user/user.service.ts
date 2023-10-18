@@ -13,11 +13,17 @@ export class UserService {
     return this.userRepository.findAll()
   }
 
-  
   findOne(id: number) : Promise<User | null > {
     return this.userRepository.findOne({
       where: {
         id,
+      },
+    });;
+  }
+  findOneByEmail(email: string) : Promise<User | null > {
+    return this.userRepository.findOne({
+      where: {
+        email,
       },
     });;
   }
